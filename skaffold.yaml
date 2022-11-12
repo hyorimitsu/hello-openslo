@@ -1,0 +1,27 @@
+apiVersion: skaffold/v3alpha1
+kind: Config
+metadata:
+  name: hello-openslo
+build:
+  tagPolicy:
+    envTemplate:
+      template: "latest"
+  artifacts:
+    - image: hello-openslo/api
+      context: ./api
+  local:
+    push: false
+    useBuildkit: true
+profiles:
+  - name: local
+    activation:
+      - env: ENV=local
+      - kubeContext: minikube
+        command: dev
+    manifests:
+      kustomize:
+        paths:
+          - ./.k8s/overlays/local
+        buildArgs: [ "--enable-helm" ]
+    deploy:
+      kubectl: {}
