@@ -1,0 +1,5 @@
+namespace: hello-openslo
+resources:
+  - namespace.yaml
+  - api/deployment.yaml
+  - api/configmap.yaml

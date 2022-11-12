@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-openslo-api
+  labels:
+    app: hello-openslo-api
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: hello-openslo-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-openslo-api
+  labels:
+    app: hello-openslo-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-openslo-api
+  template:
+    metadata:
+      labels:
+        app: hello-openslo-api
+    spec:
+      containers:
+        - name: hello-openslo-api
+          image: hello-openslo/api
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: hello-openslo-api-config
