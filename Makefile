@@ -21,6 +21,9 @@ sloth-gen:
 logs-%:
 	./script/app.sh logs $*
 
+call-api:
+	./script/api-caller.sh
+
 dashboard:
 	./script/app.sh dashboard
 
