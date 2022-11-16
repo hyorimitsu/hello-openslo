@@ -12,7 +12,7 @@ spec:
         good:
           source: prometheus
           queryType: promql
-          query: sum(rate(http_requests_total{method="get", code=~"(5..|4..)"}[{{.window}}]))
+          query: sum(rate(http_requests_total{method="get", code=~"(2..|3..)"}[{{.window}}]))
         total:
           source: prometheus
           queryType: promql
