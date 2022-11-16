@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  go-mod:
+    image: golang:1.19-alpine3.16
+    command: sh -c 'go mod tidy && go mod vendor'
+
+  sloth-gen:
+    image: ghcr.io/slok/sloth:6b1b11829228d58b904f1de5b19b99ad83541b8f
+    command: generate -i /openslo/slo.yaml -o /openslo/generated/slo.yaml
