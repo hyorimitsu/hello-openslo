@@ -8,7 +8,8 @@ server:
       - hello-openslo.localhost.com
 serverFiles:
   recording_rules.yml:
-    # いったん貼り付け
+    # I'm not sure how to load an external YAML file, so I paste it directly once.
+    #   Base file: https://github.com/hyorimitsu/hello-openslo/blob/main/.openslo/generated/slo.yaml
     groups:
     - name: sloth-slo-sli-recordings-hello-openslo-api-hello-openslo-0
       rules:
@@ -17,7 +18,7 @@ serverFiles:
           (
             1 - (
               (
-                sum(rate(http_requests_total{method="get", code=~"(5..|4..)"}[5m]))
+                sum(rate(http_requests_total{method="get", code=~"(2..|3..)"}[5m]))
               )
               /
               (
@@ -35,7 +36,7 @@ serverFiles:
           (
             1 - (
               (
-                sum(rate(http_requests_total{method="get", code=~"(5..|4..)"}[30m]))
+                sum(rate(http_requests_total{method="get", code=~"(2..|3..)"}[30m]))
               )
               /
               (
@@ -53,7 +54,7 @@ serverFiles:
           (
             1 - (
               (
-                sum(rate(http_requests_total{method="get", code=~"(5..|4..)"}[1h]))
+                sum(rate(http_requests_total{method="get", code=~"(2..|3..)"}[1h]))
               )
               /
               (
@@ -71,7 +72,7 @@ serverFiles:
           (
             1 - (
               (
-                sum(rate(http_requests_total{method="get", code=~"(5..|4..)"}[2h]))
+                sum(rate(http_requests_total{method="get", code=~"(2..|3..)"}[2h]))
               )
               /
               (
@@ -89,7 +90,7 @@ serverFiles:
           (
             1 - (
               (
-                sum(rate(http_requests_total{method="get", code=~"(5..|4..)"}[6h]))
+                sum(rate(http_requests_total{method="get", code=~"(2..|3..)"}[6h]))
               )
               /
               (
@@ -107,7 +108,7 @@ serverFiles:
           (
             1 - (
               (
-                sum(rate(http_requests_total{method="get", code=~"(5..|4..)"}[1d]))
+                sum(rate(http_requests_total{method="get", code=~"(2..|3..)"}[1d]))
               )
               /
               (
@@ -125,7 +126,7 @@ serverFiles:
           (
             1 - (
               (
-                sum(rate(http_requests_total{method="get", code=~"(5..|4..)"}[3d]))
+                sum(rate(http_requests_total{method="get", code=~"(2..|3..)"}[3d]))
               )
               /
               (
