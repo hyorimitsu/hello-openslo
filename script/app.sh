@@ -2,20 +2,20 @@
 
 if [ "x$1" = "xrun" ]; then
     if [ ! -d "$HOME/.minikube/machines/$PROJECT_NAME" ]; then
-        # 初回起動時
+        # Initial startup
         minikube start --driver=virtualbox --profile "$PROJECT_NAME"
         minikube addons enable ingress --profile "$PROJECT_NAME"
-        # /etc/hosts 更新
+        # Update /etc/hosts
         ./script/host-updater.sh "$PROJECT_NAME"
     else
-        # 2回目以降の起動時
+        # On second or subsequent startup
         minikube start --driver=virtualbox --profile "$PROJECT_NAME"
     fi
-    # Ingress が Ready になるまで待機
+    # Wait until Ingress is Ready
     INGRESS_CONTROLLER_NAME=$(kubectl get pods -o custom-columns=":metadata.name" -n ingress-nginx | grep ingress-nginx-controller)
     kubectl wait --for condition=Ready pod/$INGRESS_CONTROLLER_NAME -n ingress-nginx
     sleep 30
-    # Skaffold 起動
+    # Skaffold startup
     skaffold dev
 
 elif [ "x$1" = "xstop" ]; then

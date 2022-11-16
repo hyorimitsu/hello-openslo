@@ -4,8 +4,8 @@ metadata:
   name: hello-openslo-api
   labels:
     app: hello-openslo-api
-  # こう書けばメトリクスとして収集される
-  # 参考：https://medium.com/penguin-lab/research-about-annotations-such-as-prometheus-io-scrape-6cba3121de59
+  # To allow Prometheus to pull metrics
+  #   See here：https://medium.com/penguin-lab/research-about-annotations-such-as-prometheus-io-scrape-6cba3121de59
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/path: /metrics
