@@ -1,0 +1,10 @@
+server:
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$1
+    path: /prometheus/(.*)
+    hosts:
+      - hello-openslo.localhost.com
+serverFiles:
+  recording_rules.yml:

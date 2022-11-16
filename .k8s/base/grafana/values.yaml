@@ -1,0 +1,10 @@
+ingress:
+  enabled: true
+  path: /grafana
+  hosts:
+    - hello-openslo.localhost.com
+grafana.ini:
+  server:
+    domain: hello-openslo.localhost.com
+    root_url: http://%(domain)s/grafana
+    serve_from_sub_path: true
