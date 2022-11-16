@@ -1,0 +1,20 @@
+apiVersion: openslo/v1alpha
+kind: SLO
+metadata:
+  name: hello-openslo
+  displayName: Requests Availability
+spec:
+  service: hello-openslo-api
+  description: "Common SLO based on availability for HTTP request responses."
+  budgetingMethod: Occurrences
+  objectives:
+    - ratioMetrics:
+        good:
+          source: prometheus
+          queryType: promql
+          query: sum(rate(http_requests_total{method="get", code=~"(5..|4..)"}[{{.window}}]))
+        total:
+          source: prometheus
+          queryType: promql
+          query: sum(rate(http_requests_total{method="get"}[{{.window}}]))
+      target: 0.999
