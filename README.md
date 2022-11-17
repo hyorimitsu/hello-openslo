@@ -45,107 +45,114 @@ This is a sample of using [OpenSLO](https://github.com/OpenSLO/OpenSLO) and [Slo
 
 1. Run the application in minikube
 
-  ```shell
-  make run
-  ```
+    ```shell
+    make run
+    ```
 
 2. Confirm Prometheus
 
-  - Access the following URL to confirm if the rules described by OpenSLO are applied.
+    - Access the following URL to confirm if the rules described by OpenSLO are applied.
 
-    http://hello-openslo.localhost.com/prometheus/rules
+      http://hello-openslo.localhost.com/prometheus/rules
 
-    ![img]()
+      ![img](https://user-images.githubusercontent.com/52403055/202335382-180a896e-0a83-47c9-9a7e-636410e77a66.png)
 
-  - Access the following URL to confirm if the targets are applied.
+    - Access the following URL to confirm if the targets are applied.
 
-    http://hello-openslo.localhost.com/prometheus/targets
+      http://hello-openslo.localhost.com/prometheus/targets
 
-    ![img]()
+      ![img](https://user-images.githubusercontent.com/52403055/202335753-15d0320a-2b3a-439d-a3c1-07354f413924.png)
 
 3. Setup Grafana
 
-  - Access the following URL and login to Grafana.
+    - Access the following URL and login to Grafana.
 
-    http://hello-openslo.localhost.com/grafana/login
+      http://hello-openslo.localhost.com/grafana/login
 
-    | - | How to Confirm |
-    | --- | --- |
-    | username | `kubectl get secret -n hello-openslo hello-openslo-grafana -o jsonpath="{.data.admin-user}" | base64 --decode ; echo` |
-    | password | `kubectl get secret -n hello-openslo hello-openslo-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo` |
+      | - | How to Confirm |
+      | --- | --- |
+      | username | `kubectl get secret -n hello-openslo hello-openslo-grafana -o jsonpath="{.data.admin-user}" \| base64 --decode ; echo` |
+      | password | `kubectl get secret -n hello-openslo hello-openslo-grafana -o jsonpath="{.data.admin-password}" \| base64 --decode ; echo` |
 
-  - Specify Prometheus as the data source.
+    - Access the following URL and specify Prometheus as the data source.
 
-    http://hello-openslo.localhost.com/grafana/datasource
+      http://hello-openslo.localhost.com/grafana/datasources
 
-    ![img]()
+      | Field | Value |
+      | --- | --- |
+      | HTTP URL | http://hello-openslo.localhost.com/prometheus |
 
-  - Import the dashboard provided by Sloth.
+      After clicking the "Save & test" button, if the message "Data source is working" is displayed, the process is complete.
 
-    http://hello-openslo.localhost.com/grafana/import
+      https://user-images.githubusercontent.com/52403055/202338563-2a3a7835-383b-4c95-91cc-f72889e9dc88.mp4
 
-    | Field | Value |
-    | --- | --- |
-    |  | http://hello-openslo.localhost.com/prometheus |
-    |  | 14348 (see [here](https://sloth.dev/introduction/dashboards/)) |
+    - Access the following URL and import the dashboard provided by Sloth.
 
-    ![img]()
+      http://hello-openslo.localhost.com/grafana/dashboard/import
+
+      | Field | Value |
+      | --- | --- |
+      | Import via grafana.com | 14348 (see [here](https://sloth.dev/introduction/dashboards/)) |
+
+      After clicking the "Import" button, if the dashboard is displayed, the process is complete.
+
+      https://user-images.githubusercontent.com/52403055/202340819-f0c5d66e-6616-4051-95ad-f792032d318d.mp4
 
 4. API calls at 1s intervals
 
-  ```shell
-  make call-api
-  ```
+    ```shell
+    make call-api
+    ```
 
 5. Confirm Grafana
 
-  - Access the following URL to confirm the status of API access
+    - Access the following URL to confirm the status of API access
 
-    http://hello-openslo.localhost.com/grafana/dashboard
+      http://hello-openslo.localhost.com/grafana/d/slo-detail/slo-detail
 
-    ![img]()
+      ![img](https://user-images.githubusercontent.com/52403055/202345912-bfadf3fd-5bd4-4d78-b25b-6a404b264b41.png)
 
-    ※ You will need to wait a while for the data to be collected.
+      ※ You will need to wait a while for the data to be collected.
 
 6. Down the application in minikube
 
-  ```shell
-  make down
-  ```
+    ```shell
+    make down
+    ```
 
 ### Update OpenSLO settings
 
 1. Update OpenSLO format YAML
 
-  - Edit the following file
+    - Edit the following file
 
-    https://github.com/hyorimitsu/hello-openslo/blob/main/.openslo/slo.yaml
+      `/root/.openslo/slo.yaml`
 
 2. Generate Prometheus format YAML
 
-  - Execute generate command
+    - Execute generate command
 
-    ```shell
-    make sloth-gen
-    ```
+      ```shell
+      make sloth-gen
+      ```
 
-    The above command will generate file in the following directory.
+      The above command will generate file in the following directory.
 
-    https://github.com/hyorimitsu/hello-openslo/tree/main/.openslo/generated
+      `/root/.openslo/generated`
 
-  - Copy and paste in k8s manifest
+    - Copy and paste to k8s manifest
 
-    I'm not sure how to load an external YAML file, the file is updated manually by copying and pasting.
+      I'm not sure how to load an external YAML file, the file is updated manually by copying and pasting.
 
-    Please paste the generated results into the following file.
+      Please paste the generated results into the following file.
 
-    https://github.com/hyorimitsu/hello-openslo/blob/main/.k8s/base/prometheus/values.yaml
+      `/root/.k8s/base/prometheus/values.yaml`
 
 3. Run the application in minikube
 
-  Please refer to the following URL to start the application and confirm SLI/SLO.
+    Please refer to the following URL to start the application and confirm SLI/SLO.
 
-  https://github.com/hyorimitsu/hello-openslo#run-and-setup-the-application
+    https://github.com/hyorimitsu/hello-openslo#run-and-setup-the-application
 
 
 ## Troubleshoot
