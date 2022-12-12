@@ -4,3 +4,16 @@ resources:
   - ingress.yaml
 patches:
   - api/configmap.yaml
+helmCharts:
+  - name: prometheus
+    repo: https://prometheus-community.github.io/helm-charts
+    version: 15.18.0
+    namespace: hello-openslo
+    releaseName: hello-openslo-prometheus
+    valuesFile: prometheus/values.yaml
+  - name: grafana
+    repo: https://grafana.github.io/helm-charts
+    version: 6.43.5
+    namespace: hello-openslo
+    releaseName: hello-openslo-grafana
+    valuesFile: grafana/values.yaml
