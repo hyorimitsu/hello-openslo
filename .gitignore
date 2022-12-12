@@ -1,2 +1,2 @@
 .idea
-.k8s/base/charts
+.k8s/overlays/local/charts
