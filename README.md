@@ -126,7 +126,7 @@ This is a sample of using [OpenSLO](https://github.com/OpenSLO/OpenSLO) and [Slo
 
     - Edit the following file
 
-      `/root/.openslo/slo.yaml`
+      `${root}/.openslo/slo.yaml`
 
 2. Generate Prometheus format YAML
 
@@ -138,7 +138,7 @@ This is a sample of using [OpenSLO](https://github.com/OpenSLO/OpenSLO) and [Slo
 
       The above command will generate file in the following directory.
 
-      `/root/.openslo/generated`
+      `${root}/.openslo/generated`
 
     - Copy and paste to k8s manifest
 
@@ -146,7 +146,7 @@ This is a sample of using [OpenSLO](https://github.com/OpenSLO/OpenSLO) and [Slo
 
       Please paste the generated results into the following file.
 
-      `/root/.k8s/base/prometheus/values.yaml`
+      `${root}/.k8s/overlays/local/prometheus/values.yaml`
 
 3. Run the application in minikube
 
